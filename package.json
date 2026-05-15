@@ -7,6 +7,7 @@
     "build": "npx tsc",
     "start": "node dist/main.js",
     "dev": "npx tsc && node dist/main.js",
+    "tee": "npm run dev | tee repl.log",
     "test": "vitest --run"
   },
   "keywords": [],
