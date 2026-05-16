@@ -9,7 +9,7 @@ export async function commandMap(state: State): Promise<void> {
       console.log(area.name);
     }
   }
-  state.readline.prompt();
   state.nextLocationsURL = locations.next;
   state.prevLocationsURL = !locations.previous ? undefined : locations.previous;
+  state.readline.prompt();
 }
