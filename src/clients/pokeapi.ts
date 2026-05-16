@@ -1,4 +1,5 @@
-import { cleanInput } from "src/repl.js";
+import { sleep } from "../utils/sleep.js";
+import { cleanInput } from "../repl.js";
 
 export interface ShallowLocationsResult {
   name: string;
@@ -74,6 +75,7 @@ export class PokeAPI {
       mode: "cors",
     });
     const data = await res.json();
+    await sleep(500);
     return data;
   }
 }

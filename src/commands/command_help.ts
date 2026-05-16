@@ -1,7 +1,6 @@
 import { State } from "../state.js";
-import { getCommands } from "./command.js";
 
-export function commandHelp(state: State): void {
+export async function commandHelp(state: State): Promise<void> {
   const commands = state.commands;
   console.log("Welcome to the Pokedex!");
   console.log("Usage:\n");
@@ -9,4 +8,5 @@ export function commandHelp(state: State): void {
   for (const command in commands) {
     console.log(`${commands[command].name}: ${commands[command].description}`);
   }
+  state.readline.prompt();
 }

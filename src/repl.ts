@@ -1,4 +1,4 @@
-import { Commands, Readline } from "./state.js";
+import { State } from "./state.js";
 
 export function cleanInput(input: string): string[] {
   const arr = input
@@ -9,18 +9,25 @@ export function cleanInput(input: string): string[] {
   return arr;
 }
 
-export function startREPL(rl: Readline, commands: Commands): void {
-  rl.prompt();
-
-  rl.on("line", (line) => {
-    const firstInput = cleanInput(line)[0];
-
-    if (commands[firstInput]) {
-      commands[firstInput].callback({ readline: rl, commands });
-    } else {
-      console.log("Unknown command");
-    }
+export async function startREPL(state: State): Promise<void> {
+  try {
+    const rl = state.readline;
+    const commands = state.commands;
 
     rl.prompt();
-  });
+
+    rl.on("line", (line) => {
+      const firstInput = cleanInput(line)[0];
+
+      if (commands[firstInput]) {
+        commands[firstInput].callback(state);
+      } else {
+        console.log("Unknown command");
+        rl.prompt();
+      }
+    });
+  } catch (error) {
+    console.error("An error occurred in the REPL:", error);
+    process.exit(1);
+  }
 }
