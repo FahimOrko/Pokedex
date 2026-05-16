@@ -1,4 +1,4 @@
-import { State } from "./state.js";
+import { State } from "../state.js";
 import { getCommands } from "./command.js";
 
 export function commandHelp(state: State): void {

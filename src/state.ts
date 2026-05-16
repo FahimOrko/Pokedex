@@ -1,5 +1,5 @@
 import { createInterface, type Interface } from "readline";
-import { getCommands } from "./command.js";
+import { getCommands } from "./commands/command.js";
 
 export type CLICommand = {
   name: string;
