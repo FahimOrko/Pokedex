@@ -17,5 +17,14 @@ export async function commandEncounter(
   }
 
   const locationAreaName = args[0];
+  const exploredArea = await state.pokeAPI.fetchExploredArea(locationAreaName);
+
+  console.log(`Exploring ${locationAreaName}...`);
+  console.log("Found Pokemon:");
+
+  exploredArea.pokemon_encounters.forEach((encounter) => {
+    console.log(`- ${encounter.pokemon.name}`);
+  });
+
   state.readline.prompt();
 }
