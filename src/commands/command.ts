@@ -1,5 +1,6 @@
 import { Commands, State } from "../state.js";
 import { commandExit } from "./command_exit.js";
+import { commandEncounter } from "./command_explore.js";
 import { commandHelp } from "./command_help.js";
 import { commandMap } from "./command_map.js";
 import { commandMapBack } from "./command_mapb.js";
@@ -7,7 +8,7 @@ import { commandMapBack } from "./command_mapb.js";
 export type CLICommand = {
   name: string;
   description: string;
-  callback: (state: State) => Promise<void>;
+  callback: (state: State, ...args: string[]) => Promise<void>;
 };
 
 export function getCommands(): Commands {
@@ -31,7 +32,7 @@ export function getCommands(): Commands {
       name: "explore",
       description:
         "Explore a location to find pokemons\nUsage: explore <location name>",
-      callback: commandMapBack,
+      callback: commandEncounter,
     },
     exit: {
       name: "exit",

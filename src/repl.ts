@@ -18,9 +18,10 @@ export async function startREPL(state: State): Promise<void> {
 
     rl.on("line", (line) => {
       const firstInput = cleanInput(line)[0];
+      const args = cleanInput(line).slice(1);
 
       if (commands[firstInput]) {
-        commands[firstInput].callback(state);
+        commands[firstInput].callback(state, ...args);
       } else {
         console.log("Unknown command");
         rl.prompt();

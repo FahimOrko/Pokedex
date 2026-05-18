@@ -1,57 +1,7 @@
 import { sleep } from "../utils/sleep.js";
 import { cleanInput } from "../repl.js";
 import { Cache } from "../pokecache.js";
-
-export interface ShallowLocationsResult {
-  name: string;
-  url: string;
-}
-
-export interface LocationArea {
-  name: string;
-  url: string;
-}
-
-export interface LocationIndex {
-  game_index: number;
-  generation: LocationGeneration;
-}
-
-export interface LocationGeneration {
-  name: string;
-  url: string;
-}
-
-export interface LocationName {
-  language: LocationLanguage;
-  name: string;
-}
-
-export interface LocationLanguage {
-  name: string;
-  url: string;
-}
-
-export interface LocationRegion {
-  name: string;
-  url: string;
-}
-
-export type ShallowLocations = {
-  count: number;
-  next: string;
-  previous: string | null;
-  results: ShallowLocationsResult[];
-};
-
-export type Location = {
-  areas: LocationArea[];
-  game_indices: LocationIndex[];
-  id: number;
-  name: string;
-  names: LocationName[];
-  region: LocationRegion;
-};
+import { Location, ShallowLocations } from "./types.js";
 
 export class PokeAPI {
   private static readonly baseURL = "https://pokeapi.co/api/v2";
