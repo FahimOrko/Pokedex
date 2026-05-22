@@ -1,6 +1,7 @@
 import { catchPokemon } from "../utils/catchChance.js";
 import { State } from "../state.js";
 import { sleep } from "../utils/sleep.js";
+import { commandMap } from "./command_map.js";
 
 export async function commandCatch(
   state: State,
@@ -31,6 +32,7 @@ export async function commandCatch(
 
     if (caught) {
       console.log(`${name} was caught!`);
+      console.log("You can now inspect it with the inspect command.");
       state.pokedex[name] = pokemon;
     } else {
       console.log(`${name} escaped!`);
