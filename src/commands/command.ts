@@ -1,9 +1,11 @@
 import { Commands, State } from "../state.js";
+import { commandCatch } from "./command_catch.js";
 import { commandExit } from "./command_exit.js";
 import { commandEncounter } from "./command_explore.js";
 import { commandHelp } from "./command_help.js";
 import { commandMap } from "./command_map.js";
 import { commandMapBack } from "./command_mapb.js";
+import { commandPokedex } from "./command_pokedex.js";
 
 export type CLICommand = {
   name: string;
@@ -33,6 +35,16 @@ export function getCommands(): Commands {
       description:
         "Explore a location to find pokemons\nUsage: explore <location name>",
       callback: commandEncounter,
+    },
+    catch: {
+      name: "catch",
+      description: "Attempt to catch a pokemon\nUsage: catch <pokemon name>",
+      callback: commandCatch,
+    },
+    pokedex: {
+      name: "pokedex",
+      description: "Displays your pokedex\nUsage: pokedex",
+      callback: commandPokedex,
     },
     exit: {
       name: "exit",

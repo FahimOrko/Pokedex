@@ -2,6 +2,7 @@ import { sleep } from "../utils/sleep.js";
 import { cleanInput } from "../repl.js";
 import { Cache } from "../pokecache.js";
 import { EncounterArea, Location, ShallowLocations } from "./types.js";
+import { Pokemon } from "./pokemon.t.js";
 
 export class PokeAPI {
   private static readonly baseURL = "https://pokeapi.co/api/v2";
@@ -42,6 +43,34 @@ export class PokeAPI {
   async fetchExploredArea(areaName: string): Promise<EncounterArea> {
     const url = `${PokeAPI.baseURL}/location-area/${areaName}`;
     const cahced = this.cache.get<EncounterArea>(url);
+
+    // ----------
+    // Cahce hit
+    // ----------
+    if (cahced) {
+      return cahced;
+    }
+
+    // ----------
+    // Cahce miss
+    // ----------
+    const res = await fetch(url, {
+      method: "GET",
+      mode: "cors",
+    });
+
+    const data = await res.json();
+    this.cache.add(url, data);
+    return data;
+  }
+  // --------------------------------------------------------------------------------------------
+
+  // --------------------------------------------------------------------------------------------
+  // Fetches the explored area data for a given location area name.
+  // --------------------------------------------------------------------------------------------
+  async fetchPokemon(pokemonName: string): Promise<Pokemon> {
+    const url = `${PokeAPI.baseURL}/pokemon/${pokemonName}`;
+    const cahced = this.cache.get<Pokemon>(url);
 
     // ----------
     // Cahce hit
